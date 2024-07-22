@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/template.xhtml">
+
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet name="/css/style.css" />
+    <ui:define name="content">
+        <div class="container">
+            <h1>Patalojik Bilgilerim</h1>
+            <div class="row">
+                <div class="col-md-8" style="padding-right: 0">
+                    <h:form id="pathology-table">
+                        <h:dataTable styleClass="table table-striped" value="#{pathologyInformationController.GetEntityList()}" var="pathology">
+                            <h:column>
+                                <f:facet name="header">Patoloji Id</f:facet>
+                                    #{pathology.id}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Adı</f:facet>
+                                    #{pathology.name}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Bilgi Tarihi</f:facet>
+                                    #{pathology.informationDate}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Bilgi</f:facet>
+                                    #{pathology.information}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Sil</f:facet>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{pathologyInformationController.updateForm(pathology)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{pathologyInformationController.page}, Toplam Sayfa #{pathologyInformationController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{pathologyInformationController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{pathologyInformationController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+                    <h:form id="pathology-form">
+                        <h:inputText value="#{pathologyInformationController.entity.id}" style="display: none;"></h:inputText>
+                        <div class="form-group">
+                            <label for="inputName">Adı</label>
+                            <h:inputText styleClass="form-control" value="#{pathologyInformationController.entity.name}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDate">Bilgi Tarihi</label>
+                            <h:inputText type="date" styleClass="form-control" value="#{pathologyInformationController.entity.informationDate}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputInformation">Bilgi</label>
+                            <h:inputTextarea styleClass="form-control" value="#{pathologyInformationController.entity.information}"></h:inputTextarea>
+                        </div>
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{pathologyInformationController.UpdateEntity()}">
+                                <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{pathologyInformationController.AddEntity()}">
+                                <f:ajax execute="pathology-form" render="pathology-form pathology-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{pathologyInformationController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{pathologyInformationController.clearForm()}">
+                                <f:ajax execute="@this" render="pathology-form"/>
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Silme işlemi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu patoloji bilgisini silmek istediğinizden emin misiniz!
+                                <pre>
+                                <b>Adı :</b> #{pathologyInformationController.entity.name}<br />
+                                <b>Bilgi Tarihi :</b> #{pathologyInformationController.entity.informationDate}<br />
+                                <b>Bilgi :</b> #{pathologyInformationController.entity.information}<br />
+                                </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{pathologyInformationController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="pathology-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,105 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 21, 2024, 10:35:50 PM
+    Author     : zafer
+*/
+.nav-link {
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.navbar {
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #9abbd3 !important;
+}
+
+/* Sidebar */
+.sidebar {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #9abbd3;
+}
+
+/*.container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+    
+    padding: 0;
+    margin-left: 20px;
+    margin-right: 0;
+}*/
+
+.img{
+    height: 140px;
+    aspect-ratio: auto 359 / 250;
+    width: 250px;
+}
+
+.icon{
+    filter: none;
+}
+
+.sidebar-icon{
+    filter: none;
+    width: 32px;
+
+}
+
+.profileFoto{
+    padding-top: 20px;
+    border-radius: 50%;
+    filter: none;
+    width: 50%;
+}
+
+.mainColor {
+    background-color: #E1E2E8;
+}
+
+.profileName{
+    padding-top: 10px;
+}
+
+.yazı{
+    font-weight: 600;
+    font-size: 18px
+}
+
+.sayı{
+    font-weight: 600;
+    font-size: 18px
+}
+
+.row {
+    --bs-gutter-x: o !important;
+}
+
+.body{
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+}
+
+.link{
+    text-decoration: none !important;
+    color : var(--bs-nav-link-color);
+}
+
+.space{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

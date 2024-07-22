@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>E-Sağlık</title>
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet name="/css/style.css" />
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <div class="mainColor">
+            <div>
+                <ui:insert name="navbar" >
+                    <ui:include src="/template/include/navbar.xhtml"></ui:include>
+                </ui:insert>
+                <div class="row">
+                    <div class="col-md-2" style="padding-right: 0">
+                        <ui:insert name="sidebar" >
+                            <ui:include src="/template/include/sidebar.xhtml"></ui:include>
+                        </ui:insert>    
+                    </div>
+                    <div class="col-md-10">
+                        <ui:insert name="content">
+
+                        </ui:insert>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/NotificationController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/AdminConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/DoctorController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/Radiograph.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PatientController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/MedicationConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/DiseaseController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/MedicationController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/pages/admin/adminMainPage.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PharmacyController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Util/FileServlet.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/DonationController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/BaseController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PathologyInformationController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/DoctorConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/loginAdmin.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PaymentController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/VaccineController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/UserController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/TreatmentController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/MedicalReportController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/RadiographConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/InsuranceController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/NavigationController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/HospitalController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/User.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/pages/user/insurancePage.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/template/include/sidebar.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/Treatment.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/login.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/PathologyInformationConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/VaccinationScheduleController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Converter/PatientConverter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/TestResultController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/RadiographController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/AdminController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/pages/user/radiographPage.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/AllergyController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/PrescriptionController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/WEB-INF/web.xml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Controller/AppointmentController.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/web/pages/user/medicinePage.xhtml</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/filter/LoginFilter.java</file>
+            <file>file:/C:/workspace/E-Saglik-New/src/java/Entity/Patient.java</file>
+        </group>
+    </open-files>
+</project-private>

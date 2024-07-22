@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/template.xhtml">
+
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet name="/css/style.css" />
+    <ui:define name="content">
+        <div class="container">
+            <h1>Dökümanlarım</h1>
+            <div class="row">
+                <div class="col-md-8" style="padding-right: 0">
+                    <h:form id="document-table">
+                        <h:dataTable styleClass="table table-striped" value="#{documentController.GetEntityList()}" var="document">
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                    #{document.id}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Ad</f:facet>
+                                    #{document.name}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Başlık</f:facet>
+                                    #{document.title}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Açıklama</f:facet>
+                                    #{document.description}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Dosya Adı</f:facet>
+                                    #{document.fileName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Sil</f:facet>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{documentController.updateForm(document)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{documentController.page}, Toplam Sayfa #{documentController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{documentController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{documentController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+                    <h:form id="document-form">
+                        <h:inputText value="#{documentController.entity.id}" readonly="true" style="display:none;"></h:inputText>
+                        <div class="form-group">
+                            <label for="inputName">Ad</label>
+                            <h:inputText styleClass="form-control" value="#{documentController.entity.name}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTitle">Başlık</label>
+                            <h:inputText styleClass="form-control" value="#{documentController.entity.title}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Açıklama</label>
+                            <h:inputText styleClass="form-control" value="#{documentController.entity.description}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFileName">Dosya Adı</label>
+                            <h:inputText styleClass="form-control" value="#{documentController.entity.fileName}"></h:inputText>
+                        </div>
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{documentController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{documentController.UpdateEntity()}">
+                                <f:ajax execute="document-form" render="document-form document-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{documentController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{documentController.AddEntity()}">
+                                <f:ajax execute="document-form" render="document-form document-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{documentController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{documentController.clearForm()}">
+                                <f:ajax execute="@this" render="document-form"/>
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Silme işlemi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu belgeyi silmek istediğinizden emin misiniz!
+                                <pre>
+                                <b>Ad :</b> #{documentController.entity.name}<br />
+                                <b>Başlık :</b> #{documentController.entity.title}<br />
+                                <b>Açıklama :</b> #{documentController.entity.description}<br />
+                                <b>Dosya Adı :</b> #{documentController.entity.fileName}<br />
+                                </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{documentController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="document-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

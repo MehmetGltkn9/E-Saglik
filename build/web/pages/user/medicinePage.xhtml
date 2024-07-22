@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/template.xhtml">
+
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet name="/css/style.css" />
+    <ui:define name="content">
+        <div class="container">
+            <h1>İlaçlarım</h1>
+            <div class="row">
+                <div class="col-md-8" style="padding-right: 0">
+                    <h:form id="medication-table">
+                        <h:dataTable styleClass="table table-striped" value="#{medicationController.GetEntityList()}" var="medication">
+                            <h:column>
+                                <f:facet name="header">Adı</f:facet>
+                                <h:commandLink action="#{medicationController.updateForm(medication)}" value="#{medication.name}"></h:commandLink>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Dozaj</f:facet>
+                                    #{medication.dosage}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Sil</f:facet>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{medicationController.updateForm(medication)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{medicationController.page}, Toplam Sayfa #{medicationController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{medicationController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{medicationController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+                    <h:form id="medication-form">
+                        <h:inputText value="#{medicationController.entity.id}" style="display: none;"></h:inputText>
+                        <div class="form-group">
+                            <label for="inputName">Adı</label>
+                            <h:inputText styleClass="form-control" value="#{medicationController.entity.name}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDosage">Dozaj</label>
+                            <h:inputText styleClass="form-control" value="#{medicationController.entity.dosage}"></h:inputText>
+                        </div>
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{medicationController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{medicationController.UpdateEntity()}">
+                                <f:ajax execute="medication-form" render="medication-form medication-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{medicationController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{medicationController.AddEntity()}">
+                                <f:ajax execute="medication-form" render="medication-form medication-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{medicationController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{medicationController.clearForm()}">
+                                <f:ajax execute="@this" render="medication-form"/>
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Silme işlemi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu ilacı silmek istediğinizden emin misiniz!
+                                <pre>
+                                <b>Adı :</b> #{medicationController.entity.name}<br />
+                                <b>Dozaj :</b> #{medicationController.entity.dosage}<br />
+                                </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{medicationController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="medication-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

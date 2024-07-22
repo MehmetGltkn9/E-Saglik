@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="e-saglık">
+    <output-path>$PROJECT_DIR$/out/artifacts/e_saglk</output-path>
+    <root id="archive" name="e-saglık.jar">
+      <element id="module-output" name="E-Saglik" />
+      <element id="library" level="project" name="lib" />
+      <element id="javaee-facet-resources" facet="E-Saglik/web/Web2" />
+      <element id="javaee-facet-resources" facet="E-Saglik/web/Web" />
+    </root>
+  </artifact>
+</component>

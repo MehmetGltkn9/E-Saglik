@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/template.xhtml">
+
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet name="/css/style.css" />
+    <ui:define name="content">
+        <div class="container">
+            <h1>Sigorta İşlemlerim</h1>
+            <div class="row">
+                <div class="col-md-8" style="padding-right: 0">
+                    <h:form id="insurance-table">
+                        <h:dataTable styleClass="table table-striped" value="#{insuranceController.GetEntityList()}" var="insurance">
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                    #{insurance.id}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Ad</f:facet>
+                                    #{insurance.name}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Sağlayıcı</f:facet>
+                                    #{insurance.provider}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Kapsam Detayları</f:facet>
+                                    #{insurance.coverageDetails}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Hasta</f:facet>
+                                    #{insurance.patient.name}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">Sil</f:facet>
+                                <h:commandButton onclick="$('.modal').modal('show')" styleClass="btn btn-warning" value="Sil" action="#{insuranceController.updateForm(insurance)}">
+                                    <f:ajax execute="@this" render="delete-modal"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                        <pre>Bulunduğunuz Sayfa #{insuranceController.page}, Toplam Sayfa #{insuranceController.pageCount}</pre>
+                        <div class="btn-group">
+                            <h:commandButton action="#{insuranceController.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                            <h:commandButton action="#{insuranceController.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+                    <h:form id="insurance-form">
+                        <h:inputText value="#{insuranceController.entity.id}" readonly="true" style="display:none;"></h:inputText>
+                        <div class="form-group">
+                            <label for="inputName">Ad</label>
+                            <h:inputText styleClass="form-control" value="#{insuranceController.entity.name}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputProvider">Sağlayıcı</label>
+                            <h:inputText styleClass="form-control" value="#{insuranceController.entity.provider}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCoverageDetails">Kapsam Detayları</label>
+                            <h:inputText styleClass="form-control" value="#{insuranceController.entity.coverageDetails}"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPatient">Hasta</label>
+                            <h:inputText styleClass="form-control" value="#{insuranceController.entity.patient.name}"></h:inputText>
+                        </div>
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{insuranceController.entity.id != 0}" styleClass="btn btn-info" value="Güncelle" action="#{insuranceController.UpdateEntity()}">
+                                <f:ajax execute="insurance-form" render="insurance-form insurance-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{insuranceController.entity.id == 0}" styleClass="btn btn-primary" value="Oluştur" action="#{insuranceController.AddEntity()}">
+                                <f:ajax execute="insurance-form" render="insurance-form insurance-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{insuranceController.entity.id != 0}" styleClass="btn btn-secondary" value="Temizle" action="#{insuranceController.clearForm()}">
+                                <f:ajax execute="@this" render="insurance-form"/>
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Silme işlemi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bu kaydı silmek istediğinizden emin misiniz!
+                                <pre>
+                                <b>Ad :</b> #{insuranceController.entity.name}<br />
+                                <b>Sağlayıcı :</b> #{insuranceController.entity.provider}<br />
+                                <b>Kapsam Detayları :</b> #{insuranceController.entity.coverageDetails}<br />
+                                <b>Hasta :</b> #{insuranceController.entity.patient.name}<br />
+                                </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <button onclick="$('.modal').modal('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                <h:commandButton styleClass="btn btn-danger" value="Sil" onclick="$('.modal').modal('hide')" action="#{insuranceController.DeleteEntity()}">
+                                    <f:ajax execute="@this" render="insurance-table"/>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
