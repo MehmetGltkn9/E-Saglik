@@ -97,6 +97,56 @@ public class DoctorController extends BaseController<Doctor> implements Serializ
         this.list = list;
     }
 
+<<<<<<< Updated upstream
+=======
+    public DoctorController() {
+
+    }
+
+    @Override
+    public void AddEntity(Doctor entity) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Create(entity);
+
+    }
+
+    @Override
+    public Doctor GetEntityById(int id) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.GetById(id);
+        return null;
+    }
+
+    @Override
+    public List<Doctor> GetEntityList() {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+
+        return dao.GetList();
+    }
+
+    @Override
+    public void UpdateEntity(int id, Doctor entity) {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Update(entity);
+    }
+
+    @Override
+    public void DeleteEntity() {
+        if (dao == null) {
+            dao = new DoctorDAO();
+        }
+        dao.Delete(entity);
+    }
+
+>>>>>>> Stashed changes
     public Doctor getEntity() {
         if (entity == null) {
             entity = new Doctor();

@@ -3,6 +3,10 @@ package DAO;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+<<<<<<< Updated upstream
+=======
+import jakarta.persistence.EntityManagerFactory;
+>>>>>>> Stashed changes
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import java.io.Serializable;
